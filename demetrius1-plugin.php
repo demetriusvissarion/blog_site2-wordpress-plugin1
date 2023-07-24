@@ -36,16 +36,42 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-// 2. Precaution, same as above (checks for one constant variable)
 defined('ABSPATH') or die("Hey, what are  you doing here? You silly human!");
-// Wordpress might reject the plugin if it doesn't have at least one of the 3 protections above
 
-if (class_exists('Demetrius1Plugin')) {
+if (!class_exists('Demetrius1Plugin')) {
 	class Demetrius1Plugin
 	{
+		public $plugin;
+
+		function __construct()
+		{
+			$this->plugin = plugin_basename(__FILE__);
+		}
+
 		function register()
 		{
 			add_action('admin_enqueue_scripts', array($this, 'enqueue')); // this uses the backend, for frontend replace "admin" with "wp"
+
+			add_action('admin_menu', array($this, 'add_admin_pages'));
+
+			add_filter("plugin_action_links_$this->plugin", array($this, 'settings_link'));
+		}
+
+		public function settings_link($links)
+		{
+			$settings_link = '<a href="admin.php?page=demetrius1_plugin">Settings</a>';
+			array_push($links, $settings_link);
+			return $links;
+		}
+
+		public function add_admin_pages()
+		{
+			add_menu_page('Demetrius1 Plugin', 'Demetrius1', 'manage_options', 'demetrius1_plugin', array($this, 'admin_index'), 'dashicons-store', 110);
+		}
+
+		public function admin_index()
+		{
+			require_once plugin_dir_path(__FILE__) . 'templates/admin.php';
 		}
 
 		protected function create_post_type()

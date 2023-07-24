@@ -62,12 +62,15 @@ class Demetrius1Plugin
 	function activate()
 	{
 		// generate a CPT (Custom Post Type)
+		$this->custom_post_type();
 		// flush rewrite rules
+		flush_rewrite_rules();
 	}
 
 	function deactivate()
 	{
 		// flush rewrite rules
+		flush_rewrite_rules();
 	}
 
 	function uninstall()

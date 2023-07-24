@@ -54,22 +54,31 @@ defined('ABSPATH') or die("Hey, what are  you doing here? You silly human!");
 
 class Demetrius1Plugin
 {
-	public function activate()
+	function __construct()
 	{
-		echo 'The plugin was activated';
+		add_action('init', array($this, 'custom_post_type'));
+		// die('reached end of __constructor');
+	}
+	function activate()
+	{
 		// generate a CPT (Custom Post Type)
 		// flush rewrite rules
 	}
 
-	public function deactivate()
+	function deactivate()
 	{
-		echo 'The plugin was deactivated';
 		// flush rewrite rules
 	}
 
-	public function uninstall()
+	function uninstall()
 	{
 		// delete the CPT
+		// delete all the plugin data from the DB
+	}
+
+	function custom_post_type()
+	{
+		register_post_type('book', ['public' => true, 'label' => 'Books']);
 	}
 }
 

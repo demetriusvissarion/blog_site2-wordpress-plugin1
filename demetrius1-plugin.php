@@ -56,13 +56,18 @@ class Demetrius1Plugin
 {
 	function __construct()
 	{
-		add_action('init', array($this, 'custom_post_type'));
+		// add_action('init', array($this, 'custom_post_type'));
 		// die('reached end of __constructor');
 	}
 
 	function register()
 	{
 		add_action('admin_enqueue_scripts', array($this, 'enqueue')); // this uses the backend, for frontend replace "admin" with "wp"
+	}
+
+	protected function create_post_type()
+	{
+		add_action('init', array($this, 'custom_post_type'));
 	}
 
 	function activate()
@@ -98,10 +103,22 @@ class Demetrius1Plugin
 	}
 }
 
+class SecondClass extends Demetrius1Plugin
+{
+	function register_post_type()
+	{
+		$this->create_post_type();
+	}
+}
+
 if (class_exists('Demetrius1Plugin')) {
 	$demetrius1Plugin = new Demetrius1Plugin();
 	$demetrius1Plugin->register();
 }
+
+$secondClass = new SecondClass();
+$secondClass->register_post_type();
+
 
 // activation
 register_activation_hook(__FILE__, array($demetrius1Plugin, 'activate'));

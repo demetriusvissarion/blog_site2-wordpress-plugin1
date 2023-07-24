@@ -51,3 +51,23 @@ defined('ABSPATH') or die("Hey, what are  you doing here? You silly human!");
 // }
 
 // Wordpress might reject the plugin if it doesn't have at least one of the 3 protections above
+
+class Demetrius1Plugin
+{
+	public function __construct($string)
+	{
+		echo $string;
+	}
+}
+
+if (class_exists('Demetrius1Plugin')) {
+	$demetrius1Plugin = new Demetrius1Plugin('Demetrius1 Plugin initialized!');
+}
+
+///// Example of function if this wasn't a class
+// function customFunction($arg)
+// {
+// 	echo $arg;
+// }
+
+// customFunction('this is my argument to echo');

@@ -59,6 +59,12 @@ class Demetrius1Plugin
 		add_action('init', array($this, 'custom_post_type'));
 		// die('reached end of __constructor');
 	}
+
+	function register()
+	{
+		add_action('admin_enqueue_scripts', array($this, 'enqueue')); // this uses the backend, for frontend replace "admin" with "wp"
+	}
+
 	function activate()
 	{
 		// generate a CPT (Custom Post Type)
@@ -73,20 +79,28 @@ class Demetrius1Plugin
 		flush_rewrite_rules();
 	}
 
-	function uninstall()
-	{
-		// delete the CPT
-		// delete all the plugin data from the DB
-	}
+	// function uninstall()
+	// {
+	// 	// delete the CPT
+	// 	// delete all the plugin data from the DB
+	// }
 
-	static function custom_post_type()
+	function custom_post_type()
 	{
 		register_post_type('book', ['public' => true, 'label' => 'Books']);
+	}
+
+	function enqueue()
+	{
+		// enqueue all our scripts
+		wp_enqueue_style('mypluginstyle', plugins_url('/assets/mystyle.css', __FILE__));
+		wp_enqueue_script('mypluginscript', plugins_url('/assets/myscript.js', __FILE__));
 	}
 }
 
 if (class_exists('Demetrius1Plugin')) {
 	$demetrius1Plugin = new Demetrius1Plugin();
+	$demetrius1Plugin->register();
 }
 
 // activation
@@ -96,4 +110,4 @@ register_activation_hook(__FILE__, array($demetrius1Plugin, 'activate'));
 register_deactivation_hook(__FILE__, array($demetrius1Plugin, 'deactivate'));
 
 // uninstall
-register_uninstall_hook(__FILE__, array($demetrius1Plugin, 'uninstall'));
+// register_uninstall_hook(__FILE__, array($demetrius1Plugin, 'uninstall'));

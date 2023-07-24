@@ -54,20 +54,33 @@ defined('ABSPATH') or die("Hey, what are  you doing here? You silly human!");
 
 class Demetrius1Plugin
 {
-	public function __construct($string)
+	public function activate()
 	{
-		echo $string;
+		echo 'The plugin was activated';
+		// generate a CPT (Custom Post Type)
+		// flush rewrite rules
+	}
+
+	public function deactivate()
+	{
+		echo 'The plugin was deactivated';
+		// flush rewrite rules
+	}
+
+	public function uninstall()
+	{
+		// delete the CPT
 	}
 }
 
 if (class_exists('Demetrius1Plugin')) {
-	$demetrius1Plugin = new Demetrius1Plugin('Demetrius1 Plugin initialized!');
+	$demetrius1Plugin = new Demetrius1Plugin();
 }
 
-///// Example of function if this wasn't a class
-// function customFunction($arg)
-// {
-// 	echo $arg;
-// }
+// activation
+register_activation_hook(__FILE__, array($demetrius1Plugin, 'activate'));
 
-// customFunction('this is my argument to echo');
+// deactivation
+register_deactivation_hook(__FILE__, array($demetrius1Plugin, 'deactivate'));
+
+// uninstall

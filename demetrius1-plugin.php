@@ -79,7 +79,7 @@ class Demetrius1Plugin
 		// delete all the plugin data from the DB
 	}
 
-	function custom_post_type()
+	static function custom_post_type()
 	{
 		register_post_type('book', ['public' => true, 'label' => 'Books']);
 	}
@@ -96,3 +96,4 @@ register_activation_hook(__FILE__, array($demetrius1Plugin, 'activate'));
 register_deactivation_hook(__FILE__, array($demetrius1Plugin, 'deactivate'));
 
 // uninstall
+register_uninstall_hook(__FILE__, array($demetrius1Plugin, 'uninstall'));

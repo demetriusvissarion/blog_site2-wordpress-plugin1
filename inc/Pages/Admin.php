@@ -1,12 +1,12 @@
 <?php
 
-namespace Inc\Admin;
+namespace Inc\Pages;
 
 /**
  * @package Demetrius1Plugin
  */
 
-class AdminPages
+class Admin
 {
 	function __construct()
 	{

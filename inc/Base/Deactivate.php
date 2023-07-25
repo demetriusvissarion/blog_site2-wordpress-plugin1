@@ -4,7 +4,7 @@
  * @package Demetrius1Plugin
  */
 
-namespace Inc;
+namespace Inc\Base;
 
 class Deactivate
 {

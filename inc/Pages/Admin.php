@@ -2,11 +2,13 @@
 
 namespace Inc\Pages;
 
+use \Inc\Base\BaseController;
+
 /**
  * @package Demetrius1Plugin
  */
 
-class Admin
+class Admin extends BaseController
 {
 	public function register()
 	{
@@ -20,6 +22,6 @@ class Admin
 
 	public function admin_index()
 	{
-		require_once PLUGIN_PATH . 'templates/admin.php';
+		require_once $this->plugin_path . 'templates/admin.php';
 	}
 }

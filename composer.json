@@ -1,0 +1,19 @@
+{
+  "name": "demetrius_dv/demetrius1-plugin",
+  "description": "Building first plugin",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Decebal Demetrius Vissarion",
+      "email": "36327813+demetriusvissarion@users.noreply.github.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Inc\\": "./inc"
+    }
+  }
+}

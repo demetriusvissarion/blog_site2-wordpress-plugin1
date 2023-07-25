@@ -4,7 +4,9 @@
  * @package Demetrius1Plugin
  */
 
-class Demetrius1PluginDeactivate
+namespace Inc;
+
+class Deactivate
 {
 	public static function deactivate()
 	{

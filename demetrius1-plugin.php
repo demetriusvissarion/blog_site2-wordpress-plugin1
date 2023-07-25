@@ -38,6 +38,14 @@ SOFTWARE.
 
 defined('ABSPATH') or die("Hey, what are  you doing here? You silly human!");
 
+if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
+	require_once dirname(__FILE__) . '/vendor/autoload.php';
+}
+
+use Inc\Activate;
+use Inc\Deactivate;
+use Inc\Admin\AdminPages;
+
 if (!class_exists('Demetrius1Plugin')) {
 	class Demetrius1Plugin
 	{
@@ -93,8 +101,7 @@ if (!class_exists('Demetrius1Plugin')) {
 
 		function activate()
 		{
-			require_once plugin_dir_path(__FILE__) . 'inc/demetrius1-plugin-activate.php';
-			Demetrius1PluginActivate::activate();
+			Activate::activate();
 		}
 	}
 
@@ -105,6 +112,5 @@ if (!class_exists('Demetrius1Plugin')) {
 	register_activation_hook(__FILE__, array($demetrius1Plugin, 'activate'));
 
 	// deactivation
-	require_once plugin_dir_path(__FILE__) . 'inc/demetrius1-plugin-deactivate.php';
-	register_deactivation_hook(__FILE__, array('Demetrius1PluginDeactivate', 'deactivate'));
+	register_deactivation_hook(__FILE__, array('Deactivate', 'deactivate'));
 }

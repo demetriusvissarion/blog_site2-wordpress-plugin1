@@ -4,7 +4,9 @@
  * @package Demetrius1Plugin
  */
 
-class Demetrius1PluginActivate
+namespace Inc;
+
+class Activate
 {
 	public static function activate()
 	{

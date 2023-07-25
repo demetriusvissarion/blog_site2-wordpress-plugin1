@@ -36,12 +36,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
+// If this file is called directly, abort
 defined('ABSPATH') or die("Hey, what are  you doing here? You silly human!");
 
+// Require once the Composer Autoload
 if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
 	require_once dirname(__FILE__) . '/vendor/autoload.php';
 }
 
+// Define CONSTANTS
 define('PLUGIN_PATH', plugin_dir_path(__FILE__));
 define('PLUGIN_URL', plugin_dir_url(__FILE__));
 define('PLUGIN', plugin_basename(__FILE__));
@@ -49,6 +52,9 @@ define('PLUGIN', plugin_basename(__FILE__));
 use Inc\Base\Activate;
 use Inc\Base\Deactivate;
 
+/**
+ * The code that runs during plugin activation
+ */
 function activate_demetrius1_plugin()
 {
 	Activate::activate();

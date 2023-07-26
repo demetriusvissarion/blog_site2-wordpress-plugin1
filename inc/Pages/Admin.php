@@ -2,8 +2,9 @@
 
 namespace Inc\Pages;
 
-use \Inc\Base\BaseController;
 use \Inc\Api\SettingsApi;
+use \Inc\Base\BaseController;
+use \Inc\Api\Callbacks\AdminCallbacks;
 
 /**
  * @package Demetrius1Plugin
@@ -13,12 +14,16 @@ class Admin extends BaseController
 {
 	public $settings;
 
+	public $callbacks;
+
 	public $pages = array();
 	public $subpages = array();
 
 	public function register()
 	{
 		$this->settings = new SettingsApi();
+
+		$this->callbacks = new AdminCallbacks();
 
 		$this->setPages();
 		$this->setSubpages();
@@ -34,9 +39,7 @@ class Admin extends BaseController
 				'menu_title' => 'Demetrius1',
 				'capability' => 'manage_options',
 				'menu_slug' => 'demetrius1_plugin',
-				'callback' => function () {
-					return require_once("$this->plugin_path/templates/admin.php");
-				},
+				'callback' => array($this->callbacks, 'adminDashboard'),
 				'icon_url' => 'dashicons-store',
 				'position' => 110,
 			)
@@ -54,9 +57,7 @@ class Admin extends BaseController
 				'menu_title' => 'Custom Post Types',
 				'capability' => 'manage_options',
 				'menu_slug' => 'demetrius1_cpt',
-				'callback' => function () {
-					echo '<h1>Custom Post Types Manager</h1>';
-				},
+				'callback' => array($this->callbacks, 'customPostTypes'),
 			),
 
 			// 2. Taxonomies
@@ -66,9 +67,7 @@ class Admin extends BaseController
 				'menu_title' => 'Taxonomies',
 				'capability' => 'manage_options',
 				'menu_slug' => 'demetrius1_taxonomies',
-				'callback' => function () {
-					echo '<h1>Taxonomies Manager</h1>';
-				},
+				'callback' => array($this->callbacks, 'taxonomies'),
 			),
 
 			// 3. Widgets
@@ -78,9 +77,8 @@ class Admin extends BaseController
 				'menu_title' => 'Widgets',
 				'capability' => 'manage_options',
 				'menu_slug' => 'demetrius1_widgets',
-				'callback' => function () {
-					echo '<h1>Widgets Manager</h1>';
-				},
+				'callback' => array($this->callbacks, 'widgets'),
+
 			)
 		);
 	}

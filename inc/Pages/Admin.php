@@ -95,9 +95,14 @@ class Admin extends BaseController
 	{
 		$args = array(
 			array(
-				'option_group' => 'demetrius1_option_group',
+				'option_group' => 'demetrius1_options_group',
 				'option_name' => 'text_example',
 				'callback' => array($this->callbacks, 'demetrius1OptionsGroup'),
+			),
+
+			array(
+				'option_group' => 'demetrius1_options_group',
+				'option_name' => 'first_name',
 			)
 		);
 
@@ -129,6 +134,18 @@ class Admin extends BaseController
 				'section' => 'demetrius1_admin_index',
 				'args' => array(
 					'label_for' => 'text_example',
+					'class' => 'example-class',
+				),
+			),
+
+			array(
+				'id' => 'first_name',
+				'title' => 'First Name',
+				'callback' => array($this->callbacks, 'demetrius1FirstName'),
+				'page' => 'demetrius1_plugin',
+				'section' => 'demetrius1_admin_index',
+				'args' => array(
+					'label_for' => 'first_name',
 					'class' => 'example-class',
 				),
 			)

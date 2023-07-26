@@ -103,7 +103,7 @@ class SettingsApi
 	{
 		// register settings
 		foreach ($this->settings as $setting) {
-			register_setting($setting[option_group], $setting[option_name], (isset($setting["callback"]) ? $setting["callback"] : ''));
+			register_setting($setting['option_group'], $setting['option_name'], (isset($setting["callback"]) ? $setting["callback"] : ''));
 		}
 
 		// add settings section

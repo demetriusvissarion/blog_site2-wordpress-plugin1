@@ -1,22 +1,18 @@
 <?php
 
+/**
+ * @package Demetrius1Plugin
+ */
+
 namespace Inc\Pages;
 
 use \Inc\Api\SettingsApi;
 use \Inc\Base\BaseController;
 use \Inc\Api\Callbacks\AdminCallbacks;
 
-/**
- * @package Demetrius1Plugin
- */
-
 class Admin extends BaseController
 {
 	public $settings;
-
-	// public $sections;
-
-	// public $fields;
 
 	public $callbacks;
 
@@ -35,7 +31,6 @@ class Admin extends BaseController
 		$this->setSettings();
 		$this->setSections();
 		$this->setFields();
-
 
 		$this->settings->addPages($this->pages)->withSubPage('Dashboard')->addSubpages($this->subpages)->register();
 	}

@@ -11,38 +11,67 @@ use \Inc\Api\SettingsApi;
 
 class Admin extends BaseController
 {
-	public $setting;
+	public $settings;
+
+	public $pages = array();
+	public $subpages = array();
 
 	public function __construct()
 	{
-		$this->setting = new SettingsApi();
+		$this->settings = new SettingsApi();
+
+		$this->pages = array(
+			array(
+				'page_title' => 'Demetrius1 Plugin',
+				'menu_title' => 'Demetrius1',
+				'capability' => 'manage_options',
+				'menu_slug' => 'demetrius1_plugin',
+				'callback' => function () {
+					echo '<h1>Demetrius1 Plugin</h1>';
+				},
+				'icon_url' => 'dashicons-store',
+				'position' => 110,
+			)
+		);
+
+		$this->subpages = array(
+			array(
+				'parent_slug' => 'demetrius1_plugin',
+				'page_title' => 'Custom Post Types',
+				'menu_title' => 'CPT',
+				'capability' => 'manage_options',
+				'menu_slug' => 'demetrius1_cpt',
+				'callback' => function () {
+					echo '<h1>Custom Post Types Manager</h1>';
+				},
+			),
+
+			array(
+				'parent_slug' => 'demetrius1_plugin',
+				'page_title' => 'Custom Taxonomies',
+				'menu_title' => 'Taxonomies',
+				'capability' => 'manage_options',
+				'menu_slug' => 'demetrius1_taxonomies',
+				'callback' => function () {
+					echo '<h1>Taxonomies Manager</h1>';
+				},
+			),
+
+			array(
+				'parent_slug' => 'demetrius1_plugin',
+				'page_title' => 'Custom Widgets',
+				'menu_title' => 'Widgets',
+				'capability' => 'manage_options',
+				'menu_slug' => 'demetrius1_widgets',
+				'callback' => function () {
+					echo '<h1>Widgets Manager</h1>';
+				},
+			)
+		);
 	}
 
 	public function register()
 	{
-		// add_action('admin_menu', array($this, 'add_admin_pages'));
-		$pages = [[
-			'page_title' => 'Demetrius1 Plugin',
-			'menu_title' => 'Demetrius1',
-			'capability' => 'manage_options',
-			'menu_slug' => 'demetrius1_plugin',
-			'callback' => function () {
-				echo '<h1>Demetrius1 Plugin</h1>';
-			},
-			'icon_url' => 'dashicons-store',
-			'position' => 110,
-		]];
-
-		$this->setting->addPages($pages)->register();
+		$this->settings->addPages($this->pages)->withSubPage('Dashboard')->addSubpages($this->subpages)->register();
 	}
-
-	// public function add_admin_pages()
-	// {
-	// 	add_menu_page('Demetrius1 Plugin', 'Demetrius1', 'manage_options', 'demetrius1_plugin', array($this, 'admin_index'), 'dashicons-store', 110);
-	// }
-
-	// public function admin_index()
-	// {
-	// 	require_once $this->plugin_path . 'templates/admin.php';
-	// }
 }

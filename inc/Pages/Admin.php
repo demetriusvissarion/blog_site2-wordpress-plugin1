@@ -14,6 +14,10 @@ class Admin extends BaseController
 {
 	public $settings;
 
+	// public $sections;
+
+	// public $fields;
+
 	public $callbacks;
 
 	public $pages = array();
@@ -27,6 +31,11 @@ class Admin extends BaseController
 
 		$this->setPages();
 		$this->setSubpages();
+
+		$this->setSettings();
+		$this->setSections();
+		$this->setFields();
+
 
 		$this->settings->addPages($this->pages)->withSubPage('Dashboard')->addSubpages($this->subpages)->register();
 	}
@@ -78,8 +87,53 @@ class Admin extends BaseController
 				'capability' => 'manage_options',
 				'menu_slug' => 'demetrius1_widgets',
 				'callback' => array($this->callbacks, 'widgets'),
-
 			)
 		);
+	}
+
+	public function setSettings()
+	{
+		$args = array(
+			array(
+				'option_group' => 'demetrius1_option_group',
+				'option_name' => 'text_example',
+				'callback' => array($this->callbacks, 'demetrius1OptionsGroup'),
+			)
+		);
+
+		$this->settings->setSettings($args);
+	}
+
+	public function setSections()
+	{
+		$args = array(
+			array(
+				'id' => 'demetrius1_admin_index',
+				'title' => 'Settings',
+				'callback' => array($this->callbacks, 'demetrius1AdminSection'),
+				'page' => 'demetrius1_plugin',
+			)
+		);
+
+		$this->settings->setSections($args);
+	}
+
+	public function setFields()
+	{
+		$args = array(
+			array(
+				'id' => 'text_example',
+				'title' => 'Text Example',
+				'callback' => array($this->callbacks, 'demetrius1TextExample'),
+				'page' => 'demetrius1_plugin',
+				'section' => 'demetrius1_admin_index',
+				'args' => array(
+					'label_for' => 'text_example',
+					'class' => 'example-class',
+				),
+			)
+		);
+
+		$this->settings->setFields($args);
 	}
 }

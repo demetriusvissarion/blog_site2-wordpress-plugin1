@@ -13,7 +13,7 @@
 
 			<form method="post" action="options.php">
 				<?php
-				settings_fields('demetrius1_option_group');
+				settings_fields('demetrius1_plugin_settings');
 				do_settings_sections('demetrius1_plugin');
 				submit_button();
 				?>

@@ -1,0 +1,52 @@
+{
+  "name": "demetrius1-plugin",
+  "version": "1.0.0",
+  "description": "Awesome starter plugin example",
+  "author": "Demetrius Vissarion <demetrius.vissarion'gmail.com> (https://github.com/demetriusvissarion)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/demetriusvissarion/blog_site2-wordpress-plugin1"
+  },
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "PHP",
+    "composer",
+    "es6",
+    "scss"
+  ],
+  "devDependencies": {
+    "babelify": "^10.0.0",
+    "browser-sync": "^2.29.3",
+    "browserify": "^17.0.0",
+    "browserify-shim": "^3.8.16",
+    "npm-watch": "^0.11.0"
+  },
+  "watch": {
+    "test": "{src,test}/*.js"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browser": {
+    "jquery": "./node_modules/jquery/dist/jquery.js"
+  },
+  "browserify-shim": {
+    "jquery": "$"
+  },
+  "scripts": {
+    "test": "tape test/*.js",
+    "watch": "npm-watch"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@babel/core": "^7.22.9"
+  }
+}

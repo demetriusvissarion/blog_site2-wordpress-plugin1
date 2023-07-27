@@ -89,16 +89,69 @@ class Admin extends BaseController
 	public function setSettings()
 	{
 		$args = array(
+
+			// Custom Post Type (CTP) Manager
 			array(
-				'option_group' => 'demetrius1_options_group',
-				'option_name' => 'text_example',
+				'option_group' => 'demetrius1_plugin_settings',
+				'option_name' => 'cpt_manager',
 				'callback' => array($this->callbacks, 'demetrius1OptionsGroup'),
 			),
 
+			// Custom Taxonomy Manager
 			array(
-				'option_group' => 'demetrius1_options_group',
-				'option_name' => 'first_name',
-			)
+				'option_group' => 'demetrius1_plugin_settings',
+				'option_name' => 'taxonomy_manager',
+				'callback' => array($this->callbacks, 'demetrius1OptionsGroup'),
+			),
+
+			// Widget to Upload and Display media in sidebars
+			array(
+				'option_group' => 'demetrius1_plugin_settings',
+				'option_name' => 'media_widget',
+				'callback' => array($this->callbacks, 'demetrius1OptionsGroup'),
+			),
+
+			// Post and Pages Galery integration
+			array(
+				'option_group' => 'demetrius1_plugin_settings',
+				'option_name' => 'galery_manager',
+				'callback' => array($this->callbacks, 'demetrius1OptionsGroup'),
+			),
+
+			// Testimonial section: Comment in the front-end, Admins can approve comments, select which comments to display
+			array(
+				'option_group' => 'demetrius1_plugin_settings',
+				'option_name' => 'testimonial_manager',
+				'callback' => array($this->callbacks, 'demetrius1OptionsGroup'),
+			),
+
+			// Custom template sections
+			array(
+				'option_group' => 'demetrius1_plugin_settings',
+				'option_name' => 'templates_manager',
+				'callback' => array($this->callbacks, 'demetrius1OptionsGroup'),
+			),
+
+			// Ajax based Login/Register system
+			array(
+				'option_group' => 'demetrius1_plugin_settings',
+				'option_name' => 'login_manager',
+				'callback' => array($this->callbacks, 'demetrius1OptionsGroup'),
+			),
+
+			// Membership protected area
+			array(
+				'option_group' => 'demetrius1_plugin_settings',
+				'option_name' => 'membership_manager',
+				'callback' => array($this->callbacks, 'demetrius1OptionsGroup'),
+			),
+
+			// Chat system
+			array(
+				'option_group' => 'demetrius1_plugin_settings',
+				'option_name' => 'chat_manager',
+				'callback' => array($this->callbacks, 'demetrius1OptionsGroup'),
+			),
 		);
 
 		$this->settings->setSettings($args);

@@ -17,17 +17,17 @@ class AdminCallbacks extends BaseController
 
 	public function adminCpt()
 	{
-		return require_once("$this->plugin_path/templates/adminCpt.php");
+		return require_once("$this->plugin_path/templates/cpt.php");
 	}
 
 	public function adminTaxonomy()
 	{
-		return require_once("$this->plugin_path/templates/adminTaxonomy.php");
+		return require_once("$this->plugin_path/templates/taxonomy.php");
 	}
 
 	public function adminWidget()
 	{
-		return require_once("$this->plugin_path/templates/adminWidget.php");
+		return require_once("$this->plugin_path/templates/widget.php");
 	}
 
 	// public function demetrius1OptionsGroup( $input )

@@ -19,6 +19,7 @@ class Enqueue extends BaseController
 	{
 		// enqueue all our scripts
 		// echo $this->plugin_url . 'assets/mystyle.css';
+		// wp_enqueue_style('mypluginstyle', $this->plugin_url . 'assets/mystyle.css');
 		wp_enqueue_style('mypluginstyle', 'http://one.wordpress.test/public_html/wp-content/plugins/demetrius1-plugin/assets/mystyle.css');
 		wp_enqueue_script('mypluginstyle', 'http://one.wordpress.test/public_html/wp-content/plugins/demetrius1-plugin/assets/myscript.js');
 	}

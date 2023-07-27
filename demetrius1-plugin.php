@@ -51,15 +51,20 @@ function activate_demetrius1_plugin()
 {
 	Inc\Base\Activate::activate();
 }
+register_activation_hook(__FILE__, 'activate_demetrius1_plugin');
 
+/**
+ * The code that runs during plugin deactivation
+ */
 function deactivate_demetrius1_plugin()
 {
 	Inc\Base\Deactivate::deactivate();
 }
-
-register_activation_hook(__FILE__, 'activate_demetrius1_plugin');
 register_deactivation_hook(__FILE__, 'deactivate_demetrius1_plugin');
 
+/**
+ * Initialize all the core classes of the plugin
+ */
 if (class_exists('Inc\\Init')) {
 	Inc\Init::register_services();
 }

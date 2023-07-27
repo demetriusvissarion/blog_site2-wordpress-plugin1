@@ -16,14 +16,12 @@
     "scss"
   ],
   "devDependencies": {
+    "@babel/core": "^7.22.9",
     "babelify": "^10.0.0",
     "browser-sync": "^2.29.3",
     "browserify": "^17.0.0",
     "browserify-shim": "^3.8.16",
     "npm-watch": "^0.11.0"
-  },
-  "watch": {
-    "test": "{src,test}/*.js"
   },
   "babel": {
     "presets": [
@@ -42,11 +40,26 @@
     "jquery": "$"
   },
   "scripts": {
-    "test": "tape test/*.js",
+    "sass": "sass src/scss/mystyle.scss assets/mystyle.css",
     "watch": "npm-watch"
+  },
+  "watch": {
+    "sass": {
+      "patterns": [
+        "src/scss"
+      ],
+      "extensions": [
+        "scss"
+      ]
+    }
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "^7.22.9"
+    "@babel/core": "^7.22.9",
+    "babelify": "^10.0.0",
+    "browser-sync": "^2.29.3",
+    "browserify": "^17.0.0",
+    "browserify-shim": "^3.8.16",
+    "npm-watch": "^0.11.0"
   }
 }

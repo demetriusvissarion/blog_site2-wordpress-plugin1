@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package Demetrius1Plugin
+ * @package  Demetrius1Plugin
  */
 
 namespace Inc;
@@ -15,9 +15,18 @@ final class Init
 	public static function get_services()
 	{
 		return [
-			Pages\Admin::class,
+			Pages\Dashboard::class,
 			Base\Enqueue::class,
 			Base\SettingsLinks::class,
+			Base\CustomPostTypeController::class,
+			Base\CustomTaxonomyController::class,
+			Base\WidgetController::class,
+			Base\GalleryController::class,
+			Base\TestimonialController::class,
+			Base\TemplateController::class,
+			Base\AuthController::class,
+			Base\MembershipController::class,
+			Base\ChatController::class,
 		];
 	}
 
@@ -38,8 +47,8 @@ final class Init
 
 	/**
 	 * Initialize the class
-	 * @param class $class      class from the services array
-	 * @return class instance   new instance of the class
+	 * @param  class $class    class from the services array
+	 * @return class instance  new instance of the class
 	 */
 	private static function instantiate($class)
 	{

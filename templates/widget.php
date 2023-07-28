@@ -1,1 +1,1 @@
-<h1>Widgets (2)</h1>
+<h1>Widgets Manager (2)</h1>

@@ -1,14 +1,18 @@
 <?php
 
 /**
- * @package Demetrius1Plugin
+ * @package  Demetrius1Plugin
  */
 
 namespace Inc\Base;
 
 class BaseController
 {
-	public $plugin_path, $plugin_url, $plugin;
+	public $plugin_path;
+
+	public $plugin_url;
+
+	public $plugin;
 
 	public $managers = array();
 
@@ -30,9 +34,11 @@ class BaseController
 			'chat_manager' => 'Activate Chat Manager'
 		);
 	}
-}
 
-// Define CONSTANTS
-// define('PLUGIN_PATH', plugin_dir_path(__FILE__));
-// define('PLUGIN_URL', plugin_dir_url(__FILE__));
-// define('PLUGIN', plugin_basename(__FILE__));
+	public function activated(string $key)
+	{
+		$option = get_option('demetrius1_plugin');
+
+		return isset($option[$key]) ? $option[$key] : false;
+	}
+}

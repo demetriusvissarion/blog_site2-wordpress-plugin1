@@ -97,71 +97,15 @@ class Admin extends BaseController
 
 	public function setSettings()
 	{
-		$args = array(
+		$args = array();
 
-			// Custom Post Type (CTP) Manager
-			array(
+		foreach ($this->managers as $key => $value) {
+			$args[] = array(
 				'option_group' => 'demetrius1_plugin_settings',
-				'option_name' => 'cpt_manager',
+				'option_name' => $key,
 				'callback' => array($this->callbacks_mngr, 'checkboxSanitize')
-			),
-
-			// Custom Taxonomy Manager
-			array(
-				'option_group' => 'demetrius1_plugin_settings',
-				'option_name' => 'taxonomy_manager',
-				'callback' => array($this->callbacks_mngr, 'checkboxSanitize')
-			),
-
-			// Widget to Upload and Display media in sidebars
-			array(
-				'option_group' => 'demetrius1_plugin_settings',
-				'option_name' => 'media_widget',
-				'callback' => array($this->callbacks_mngr, 'checkboxSanitize')
-			),
-
-			// Post and Pages Galery integration
-			array(
-				'option_group' => 'demetrius1_plugin_settings',
-				'option_name' => 'gallery_manager',
-				'callback' => array($this->callbacks_mngr, 'checkboxSanitize')
-			),
-
-			// Testimonial section: Comment in the front-end, Admins can approve comments, select which comments to display
-			array(
-				'option_group' => 'demetrius1_plugin_settings',
-				'option_name' => 'testimonial_manager',
-				'callback' => array($this->callbacks_mngr, 'checkboxSanitize')
-			),
-
-			// Custom template sections
-			array(
-				'option_group' => 'demetrius1_plugin_settings',
-				'option_name' => 'templates_manager',
-				'callback' => array($this->callbacks_mngr, 'checkboxSanitize')
-			),
-
-			// Ajax based Login/Register system
-			array(
-				'option_group' => 'demetrius1_plugin_settings',
-				'option_name' => 'login_manager',
-				'callback' => array($this->callbacks_mngr, 'checkboxSanitize')
-			),
-
-			// Membership protected area
-			array(
-				'option_group' => 'demetrius1_plugin_settings',
-				'option_name' => 'membership_manager',
-				'callback' => array($this->callbacks_mngr, 'checkboxSanitize')
-			),
-
-			// Chat system
-			array(
-				'option_group' => 'demetrius1_plugin_settings',
-				'option_name' => 'chat_manager',
-				'callback' => array($this->callbacks_mngr, 'checkboxSanitize')
-			)
-		);
+			);
+		}
 
 		$this->settings->setSettings($args);
 	}

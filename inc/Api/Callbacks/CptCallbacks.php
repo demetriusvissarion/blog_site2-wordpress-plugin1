@@ -18,6 +18,12 @@ class CptCallbacks
 	{
 		$output = get_option('demetrius1_plugin_cpt');
 
+		if (count($output) == 0) {
+			$output[$input['post_type']] = $input;
+
+			return $output;
+		}
+
 		foreach ($output as $key => $value) {
 			if ($input['post_type'] === $key) {
 				$output[$key] = $input;
@@ -39,7 +45,7 @@ class CptCallbacks
 		// 	$value = $input[$name];
 		// }
 
-		echo '<input type="text" class="regular-text" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="" placeholder="' . $args['placeholder'] . '">';
+		echo '<input type="text" class="regular-text" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="" placeholder="' . $args['placeholder'] . '" required>';
 	}
 
 	public function checkboxField($args)

@@ -30,7 +30,7 @@
 
 .tab-content > .tab-pane {
   float: left;
-  width: 100%;
+  width: 98%;
   display: none;
 }
 .tab-content > .tab-pane.active {
@@ -99,6 +99,10 @@ div.ui-toggle label:hover, div.ui-toggle label > div:hover {
 
 .text-center {
   text-align: center;
+}
+
+.inline-block {
+  display: inline-block;
 }
 
 /*# sourceMappingURL=mystyle.css.map */

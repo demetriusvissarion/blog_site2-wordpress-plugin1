@@ -4,8 +4,8 @@
 
 	<form method="post" action="options.php">
 		<?php
-		settings_fields('alecaddd_plugin_cpt_settings');
-		do_settings_sections('alecaddd_cpt');
+		settings_fields('demetrius1_plugin_cpt_settings');
+		do_settings_sections('demetrius1_cpt');
 		submit_button();
 		?>
 	</form>

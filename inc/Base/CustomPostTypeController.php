@@ -168,7 +168,7 @@ class CustomPostTypeController extends BaseController
 
 		// foreach ($options as $option) {
 
-		if (!empty($option)) {
+		if (!empty($option)) {   // DDV
 
 			$this->custom_post_types[] = array(
 				'post_type'             => $options['post_type'],
@@ -216,7 +216,7 @@ class CustomPostTypeController extends BaseController
 				'publicly_queryable'    => true,
 				'capability_type'       => 'post'
 			);
-		} else {
+		} else {   // DDV
 			return;
 		}
 

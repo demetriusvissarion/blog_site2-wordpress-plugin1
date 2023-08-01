@@ -37,7 +37,7 @@ SOFTWARE.
 */
 
 // If this file is called directly, abort
-defined('ABSPATH') or die("Hey, what are  you doing here? You silly human!");
+defined('ABSPATH') or die("Hey, what are  you doing here?");
 
 // Require once the Composer Autoload
 if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {

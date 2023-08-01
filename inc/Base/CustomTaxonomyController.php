@@ -135,6 +135,19 @@ class CustomTaxonomyController extends BaseController
 					'class' => 'ui-toggle',
 					'array' => 'taxonomy'
 				)
+			),
+			array(
+				'id' => 'objects',
+				'title' => 'Post Types',
+				'callback' => array($this->tax_callbacks, 'checkboxPostTypesField'),
+				'page' => 'demetrius1_taxonomy',
+				'section' => 'demetrius1_tax_index',
+				'args' => array(
+					'option_name' => 'demetrius1_plugin_tax',
+					'label_for' => 'objects',
+					'class' => 'ui-toggle',
+					'array' => 'taxonomy'
+				)
 			)
 		);
 
@@ -143,10 +156,8 @@ class CustomTaxonomyController extends BaseController
 
 	public function storeCustomTaxonomies()
 	{
-		// get the taxonomies array
 		$options = get_option('demetrius1_plugin_tax') ?: array();
 
-		// store those info into an array
 		foreach ($options as $option) {
 			$labels = array(
 				'name'              => $option['singular_name'],
@@ -169,15 +180,16 @@ class CustomTaxonomyController extends BaseController
 				'show_admin_column' => true,
 				'query_var'         => true,
 				'rewrite'           => array('slug' => $option['taxonomy']),
+				'objects'           => isset($option['objects']) ? $option['objects'] : null
 			);
 		}
-		// register the taxonomy
 	}
 
 	public function registerCustomTaxonomy()
 	{
 		foreach ($this->taxonomies as $taxonomy) {
-			register_taxonomy($taxonomy['rewrite']['slug'], array('post'), $taxonomy);
+			$objects = isset($taxonomy['objects']) ? array_keys($taxonomy['objects']) : null;
+			register_taxonomy($taxonomy['rewrite']['slug'], $objects, $taxonomy);
 		}
 	}
 }

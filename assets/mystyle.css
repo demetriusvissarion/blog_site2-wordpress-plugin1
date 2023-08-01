@@ -48,9 +48,9 @@ div.ui-toggle input[type=checkbox] {
   display: none;
 }
 div.ui-toggle input[type=checkbox]:checked + label {
-  border-color: #ea2f00;
-  background: #ea2f00;
-  box-shadow: inset 0 0 0 10px #ea2f00;
+  border-color: #009eea;
+  background: #009eea;
+  box-shadow: inset 0 0 0 10px #009eea;
 }
 div.ui-toggle input[type=checkbox]:checked + label > div {
   margin-left: 20px;
@@ -66,7 +66,7 @@ div.ui-toggle label {
   -ms-user-select: none;
   user-select: none;
   background: #8c8c8c;
-  box-shadow: inset 0 0 0 0 #ea2f00;
+  box-shadow: inset 0 0 0 0 #009eea;
   border: 2px solid #8c8c8c;
   border-radius: 22px;
   width: 40px;
@@ -81,6 +81,9 @@ div.ui-toggle label div {
 }
 div.ui-toggle label:hover, div.ui-toggle label > div:hover {
   cursor: pointer;
+}
+div.ui-toggle.mb-10 {
+  margin-bottom: 10px;
 }
 
 .cpt-table {

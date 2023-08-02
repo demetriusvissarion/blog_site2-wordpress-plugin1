@@ -21,7 +21,7 @@ class ChatController extends BaseController
 
 	public function register()
 	{
-		if (!$this->activated('media_widget')) return;
+		if (!$this->activated('chat_manager')) return;
 
 		$this->settings = new SettingsApi();
 
@@ -37,8 +37,8 @@ class ChatController extends BaseController
 		$this->subpages = array(
 			array(
 				'parent_slug' => 'demetrius1_plugin',
-				'page_title' => 'Widgets Manager',
-				'menu_title' => 'Widgets Manager',
+				'page_title' => 'Chat Manager',
+				'menu_title' => 'Chat Manager',
 				'capability' => 'manage_options',
 				'menu_slug' => 'demetrius1_widget',
 				'callback' => array($this->callbacks, 'adminWidget')

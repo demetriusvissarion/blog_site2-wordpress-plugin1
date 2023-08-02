@@ -26,6 +26,9 @@ class TestimonialController extends BaseController
 		add_action('init', array($this, 'testimonial_cpt'));
 		add_action('add_meta_boxes', array($this, 'add_meta_boxes'));
 		add_action('save_post', array($this, 'save_meta_box'));
+		add_action('manage_testimonial_posts_columns', array($this, 'set_custom_columns'));
+		add_action('manage_testimonial_posts_custom_column', array($this, 'set_custom_columns_data'), 10, 2);
+		add_filter('manage_edit-testimonial_sortable_columns', array($this, 'set_custom_columns_sortable'));
 	}
 
 	public function testimonial_cpt()
@@ -127,5 +130,52 @@ class TestimonialController extends BaseController
 			'featured' => isset($_POST['demetrius1_testimonial_featured']) ? 1 : 0,
 		);
 		update_post_meta($post_id, '_demetrius1_testimonial_key', $data);
+	}
+
+	public function set_custom_columns($columns)
+	{
+		$title = $columns['title'];
+		$date = $columns['date'];
+		unset($columns['title'], $columns['date']);
+
+		$columns['name'] = 'Author Name';
+		$columns['title'] = $title;
+		$columns['approved'] = 'Approved';
+		$columns['featured'] = 'Featured';
+		$columns['date'] = $date;
+
+		return $columns;
+	}
+
+	public function set_custom_columns_data($column, $post_id)
+	{
+		$data = get_post_meta($post_id, '_demetrius1_testimonial_key', true);
+		$name = isset($data['name']) ? $data['name'] : '';
+		$email = isset($data['email']) ? $data['email'] : '';
+		$approved = isset($data['approved']) && $data['approved'] === 1 ? '<strong>YES</strong>' : 'NO';
+		$featured = isset($data['featured']) && $data['featured'] === 1 ? '<strong>YES</strong>' : 'NO';
+
+		switch ($column) {
+			case 'name':
+				echo '<strong>' . $name . '</strong><br/><a href="mailto:' . $email . '">' . $email . '</a>';
+				break;
+
+			case 'approved':
+				echo $approved;
+				break;
+
+			case 'featured':
+				echo $featured;
+				break;
+		}
+	}
+
+	public function set_custom_columns_sortable($columns)
+	{
+		$columns['name'] = 'name';
+		$columns['approved'] = 'approved';
+		$columns['featured'] = 'featured';
+
+		return $columns;
 	}
 }

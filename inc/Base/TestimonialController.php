@@ -42,8 +42,12 @@ class TestimonialController extends BaseController
 	public function testimonial_form()
 	{
 		ob_start();
-		require_once("$this->plugin_path/templates/contact-form.php");
-		echo "<script src=\"$this->plugin_url/assets/src/js/form.js\"></script>";
+		echo "<link rel=\"stylesheet\" href=\"http://one.wordpress.test/public_html/wp-content/plugins/demetrius1-plugin/assets/form.css\" type=\"text/css\" media=\"all\" />";
+		require_once("$this->plugin_path" . "templates/contact-form.php");
+		// echo "$this->plugin_path" . "templates/contact-form.php";
+		echo "
+		<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js\"></script>
+		<script src=\"http://one.wordpress.test/public_html/wp-content/plugins/demetrius1-plugin/assets/build/js/app.js\"></script>";
 		return ob_get_clean();
 	}
 

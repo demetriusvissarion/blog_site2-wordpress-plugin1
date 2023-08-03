@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
   testimonialForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    console.log("Prevent form to submit");
 
     // reset the form messages
     resetMessages();
@@ -23,10 +22,46 @@ document.addEventListener("DOMContentLoaded", function (e) {
       return;
     }
 
+    if (!data.name) {
+      testimonialForm
+        .querySelector('[data-error="invalidName"]')
+        .classList.add("show");
+      return;
+    }
+
+    if (!data.message) {
+      testimonialForm
+        .querySelector('[data-error="invalidMessage"]')
+        .classList.add("show");
+      return;
+    }
+
     // ajax http post request
     let url = testimonialForm.dataset.url;
+    let params = new URLSearchParams(new FormData(testimonialForm));
 
-    console.log(url);
+    testimonialForm.querySelector(".js-form-submission").classList.add("show");
+
+    fetch(url, {
+      method: "POST",
+      body: params,
+    })
+      .then((res) => res.json())
+      .catch((error) => {
+        resetMessages();
+        testimonialForm.querySelector(".js-form-error").classList.add("show");
+      })
+      .then((response) => {
+        resetMessages();
+
+        if (response === 0 || response.status === "error") {
+          testimonialForm.querySelector(".js-form-error").classList.add("show");
+          return;
+        }
+
+        testimonialForm.querySelector(".js-form-success").classList.add("show");
+        resetForm(testimonialForm);
+      });
   });
 });
 
@@ -40,4 +75,10 @@ function validateEmail(email) {
   let re =
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
+}
+
+function resetForm(form) {
+  form.querySelector('[name="name"]').value = "";
+  form.querySelector('[name="email"]').value = "";
+  form.querySelector('[name="message"]').value = "";
 }

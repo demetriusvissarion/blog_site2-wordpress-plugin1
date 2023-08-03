@@ -41,8 +41,12 @@ class TestimonialController extends BaseController
 		add_action('wp_ajax_nopriv_submit_testmionial', array($this, 'submit_testmionial'));
 	}
 
-	public function submit_testmionial()
+	public function submit_testimonial()
 	{
+		if (!DOING_AJAX || !check_ajax_referer('testimonial-nonce', 'nonce')) {
+			return $this->return_json('error');
+		}
+
 		$name = sanitize_text_field($_POST['name']);
 		$email = sanitize_email($_POST['email']);
 		$message = sanitize_textarea_field($_POST['message']);
@@ -51,7 +55,7 @@ class TestimonialController extends BaseController
 			'name' => $name,
 			'email' => $email,
 			'approved' => 0,
-			'featured' => 0
+			'featured' => 0,
 		);
 
 		$args = array(
@@ -68,17 +72,16 @@ class TestimonialController extends BaseController
 		$postID = wp_insert_post($args);
 
 		if ($postID) {
-			$return = array(
-				'status' => 'success',
-				'ID' => $postID
-			);
-			wp_send_json($return);
-
-			wp_die();
+			return $this->return_json('success');
 		}
 
+		return $this->return_json('error');
+	}
+
+	public function return_json($status)
+	{
 		$return = array(
-			'status' => 'error'
+			'status' => $status
 		);
 		wp_send_json($return);
 
@@ -207,7 +210,7 @@ class TestimonialController extends BaseController
 
 		$data = array(
 			'name' => sanitize_text_field($_POST['demetrius1_testimonial_author']),
-			'email' => sanitize_text_field($_POST['demetrius1_testimonial_email']),
+			'email' => sanitize_email($_POST['demetrius1_testimonial_email']),
 			'approved' => isset($_POST['demetrius1_testimonial_approved']) ? 1 : 0,
 			'featured' => isset($_POST['demetrius1_testimonial_featured']) ? 1 : 0,
 		);

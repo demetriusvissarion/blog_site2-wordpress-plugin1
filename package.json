@@ -44,7 +44,7 @@
     "jquery": "$"
   },
   "scripts": {
-    "sass": "sass src/scss/mystyle.scss assets/mystyle.css",
+    "sass": "sass assets/src/scss/mystyle.scss assets/src/scss/form.scss",
     "build": "webpack --mode production",
     "watch": "webpack --config assets/webpack.config.js --mode=development --watch",
     "dev": "webpack --config assets/webpack.config.js"

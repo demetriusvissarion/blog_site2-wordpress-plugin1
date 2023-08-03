@@ -1,10 +1,11 @@
 const path = require("path");
 // JS Directory path.
 const JS_DIR = path.resolve(__dirname, "src/js");
-const IMG_DIR = path.resolve(__dirname, "src/images");
+// const IMG_DIR = path.resolve(__dirname, "src/images");
 const BUILD_DIR = path.resolve(__dirname, "build");
 const entry = {
-  app: JS_DIR + "/app.js",
+  // app: JS_DIR + "/app.js",
+  app: [JS_DIR + "/app.js", JS_DIR + "/form.js"],
 };
 const output = {
   path: BUILD_DIR,

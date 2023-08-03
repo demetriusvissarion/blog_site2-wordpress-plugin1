@@ -1,12 +1,13 @@
 /******/ (() => { // webpackBootstrap
 var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
 /*!***********************!*\
   !*** ./src/js/app.js ***!
   \***********************/
 // import "code-prettify";
-console.log("jdjdj");
 window.addEventListener("load", function () {
-  PR.prettyPrint();
+  // PR.prettyPrint();
 
   // store tabs variables
   var tabs = document.querySelectorAll("ul.nav-tabs > li");
@@ -26,7 +27,6 @@ window.addEventListener("load", function () {
 });
 jQuery(document).ready(function ($) {
   $(document).on("click", ".js-image-upload", function (e) {
-    console.log("jdjdj");
     e.preventDefault();
     var $button = $(this);
     var file_frame = wp.media.frames.file_frame = wp.media({
@@ -47,6 +47,18 @@ jQuery(document).ready(function ($) {
     file_frame.open();
   });
 });
+})();
+
+// This entry need to be wrapped in an IIFE because it need to be isolated against other entry modules.
+(() => {
+/*!************************!*\
+  !*** ./src/js/form.js ***!
+  \************************/
+document.addEventListener("DOMContentLoaded", function (e) {
+  console.log("This is Ready!");
+});
+})();
+
 /******/ })()
 ;
 //# sourceMappingURL=app.js.map

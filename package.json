@@ -44,7 +44,7 @@
     "jquery": "$"
   },
   "scripts": {
-    "sass": "sass assets/src/scss/mystyle.scss assets/mystyle.css && sass assets/src/scss/form.scss assets/form.css && sass assets/src/scss/form.scss assets/slider.css",
+    "sass": "sass assets/src/scss/mystyle.scss assets/mystyle.css && sass assets/src/scss/form.scss assets/form.css && sass assets/src/scss/slider.scss assets/slider.css",
     "watch": "npm-watch"
   },
   "watch": {

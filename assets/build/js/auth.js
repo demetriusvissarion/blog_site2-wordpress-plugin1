@@ -20,16 +20,22 @@ document.addEventListener("DOMContentLoaded", function (e) {
   authForm.addEventListener("submit", e => {
     e.preventDefault();
     resetMessages();
+
+    // collect all data
     let data = {
       name: authForm.querySelector('[name="username"]').value,
       password: authForm.querySelector('[name="password"]').value,
       nonce: authForm.querySelector('[name="demetrius1_auth"]').value
     };
+
+    // validate everything
     if (!data.name || !data.password) {
       status.innerHTML = "Missing Data";
       status.classList.add("error");
       return;
     }
+
+    // ajax http post request
     let url = authForm.dataset.url;
     let params = new URLSearchParams(new FormData(authForm));
     authForm.querySelector('[name="submit"]').value = "Logging in...";
@@ -52,6 +58,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
       window.location.reload();
     });
   });
+
+  // reset all the messages
   function resetMessages() {
     status.innerHTML = "";
     status.classList.remove("success", "error");

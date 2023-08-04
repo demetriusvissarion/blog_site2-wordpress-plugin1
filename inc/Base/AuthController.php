@@ -6,43 +6,35 @@
 
 namespace Inc\Base;
 
-use Inc\Api\SettingsApi;
 use Inc\Base\BaseController;
-use Inc\Api\Callbacks\AdminCallbacks;
 
 /**
  *
  */
 class AuthController extends BaseController
 {
-	public $callbacks;
-
-	public $subpages = array();
-
 	public function register()
 	{
 		if (!$this->activated('login_manager')) return;
 
-		$this->settings = new SettingsApi();
-
-		$this->callbacks = new AdminCallbacks();
-
-		$this->setSubpages();
-
-		$this->settings->addSubPages($this->subpages)->register();
+		add_action('wp_enqueue_scripts', array($this, 'enqueue'));
+		add_action('wp_head', array($this, 'add_auth_template'));
 	}
 
-	public function setSubpages()
+	public function enqueue()
 	{
-		$this->subpages = array(
-			array(
-				'parent_slug' => 'demetrius1_plugin',
-				'page_title' => 'Login Manager',
-				'menu_title' => 'Login Manager',
-				'capability' => 'manage_options',
-				'menu_slug' => 'demetrius1_auth',
-				'callback' => array($this->callbacks, 'adminAuth')
-			)
-		);
+		wp_enqueue_style('authstyle', $this->plugin_url . 'assets/auth.css');
+		wp_enqueue_script('authscript', 'http://one.wordpress.test/public_html/wp-content/plugins/demetrius1-plugin/assets/build/js/auth.js');
+	}
+
+	public function add_auth_template()
+	{
+		if (is_user_logged_in()) return;
+
+		$file = $this->plugin_path . 'templates/auth.php';
+
+		if (file_exists($file)) {
+			load_template($file, true);
+		}
 	}
 }

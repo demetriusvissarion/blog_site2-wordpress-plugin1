@@ -9,6 +9,7 @@ const entry = {
   // app: JS_DIR + "/app.js",
   app: [JS_DIR + "/app.js", JS_DIR + "/form.js"],
   slider: [JS_DIR + "/slider.js"],
+  auth: [JS_DIR + "/auth.js"],
 };
 const output = {
   path: BUILD_DIR,

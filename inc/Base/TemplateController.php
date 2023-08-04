@@ -6,43 +6,54 @@
 
 namespace Inc\Base;
 
-use Inc\Api\SettingsApi;
 use Inc\Base\BaseController;
-use Inc\Api\Callbacks\AdminCallbacks;
 
 /**
  *
  */
 class TemplateController extends BaseController
 {
-	public $callbacks;
-
-	public $subpages = array();
+	public $templates;
 
 	public function register()
 	{
 		if (!$this->activated('templates_manager')) return;
 
-		$this->settings = new SettingsApi();
+		$this->templates = array(
+			'page-templates/two-columns-tpl.php' => 'Two Columns Layout'
+		);
 
-		$this->callbacks = new AdminCallbacks();
-
-		$this->setSubpages();
-
-		$this->settings->addSubPages($this->subpages)->register();
+		add_filter('theme_page_templates', array($this, 'custom_template'));
+		add_filter('template_include', array($this, 'load_template'));
 	}
 
-	public function setSubpages()
+	public function custom_template($templates)
 	{
-		$this->subpages = array(
-			array(
-				'parent_slug' => 'demetrius1_plugin',
-				'page_title' => 'Templates Manager',
-				'menu_title' => 'Templates Manager',
-				'capability' => 'manage_options',
-				'menu_slug' => 'demetrius1_templates',
-				'callback' => array($this->callbacks, 'adminTemplates')
-			)
-		);
+		$templates = array_merge($templates, $this->templates);
+
+		return $templates;
+	}
+
+	public function load_template($template)
+	{
+		global $post;
+
+		if (!$post) {
+			return $template;
+		}
+
+		$template_name = get_post_meta($post->ID, '_wp_page_template', true);
+
+		if (!isset($this->templates[$template_name])) {
+			return $template;
+		}
+
+		$file = $this->plugin_path . $template_name;
+
+		if (file_exists($file)) {
+			return $file;
+		}
+
+		return $template;
 	}
 }

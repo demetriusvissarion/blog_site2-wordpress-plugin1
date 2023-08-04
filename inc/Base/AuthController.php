@@ -19,6 +19,7 @@ class AuthController extends BaseController
 
 		add_action('wp_enqueue_scripts', array($this, 'enqueue'));
 		add_action('wp_head', array($this, 'add_auth_template'));
+		add_action('wp_ajax_nopriv_demetrius1_login', array($this, 'login'));
 	}
 
 	public function enqueue()
@@ -36,5 +37,37 @@ class AuthController extends BaseController
 		if (file_exists($file)) {
 			load_template($file, true);
 		}
+	}
+
+	public function login()
+	{
+		check_ajax_referer('ajax-login-nonce', 'demetrius1_auth');
+
+		$info = array();
+		$info['user_login'] = $_POST['username'];
+		$info['user_password'] = $_POST['password'];
+		$info['remember'] = true;
+
+		$user_signon = wp_signon($info, true);
+
+		if (is_wp_error($user_signon)) {
+			echo json_encode(
+				array(
+					'status' => false,
+					'message' => 'Wrong username or password'
+				)
+			);
+
+			die();
+		}
+
+		echo json_encode(
+			array(
+				'status' => true,
+				'message' => 'Login successful, redirecting...'
+			)
+		);
+
+		die();
 	}
 }

@@ -37,8 +37,9 @@ class TestimonialController extends BaseController
 		$this->setShortcodePage();
 
 		add_shortcode('testimonial-form', array($this, 'testimonial_form'));
-		add_action('wp_ajax_submit_testmionial', array($this, 'submit_testmionial'));
-		add_action('wp_ajax_nopriv_submit_testmionial', array($this, 'submit_testmionial'));
+		add_shortcode('testimonial-slideshow', array($this, 'testimonial_slideshow'));
+		add_action('wp_ajax_submit_testimonial', array($this, 'submit_testimonial'));
+		add_action('wp_ajax_nopriv_submit_testimonial', array($this, 'submit_testimonial'));
 	}
 
 	public function submit_testimonial()
@@ -88,7 +89,7 @@ class TestimonialController extends BaseController
 		wp_die();
 	}
 
-	public function testimonial_form()
+	public function testimonial_form()   // DDV 03/08/2023 - do not change paths!
 	{
 		ob_start();
 		echo "<link rel=\"stylesheet\" href=\"http://one.wordpress.test/public_html/wp-content/plugins/demetrius1-plugin/assets/form.css\" type=\"text/css\" media=\"all\" />";
@@ -97,6 +98,17 @@ class TestimonialController extends BaseController
 		echo "
 		<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js\"></script>
 		<script src=\"http://one.wordpress.test/public_html/wp-content/plugins/demetrius1-plugin/assets/build/js/app.js\"></script>";
+		return ob_get_clean();
+	}
+
+	public function testimonial_slideshow()   // DDV 03/08/2023 - do not change paths!
+	{
+		ob_start();
+		echo "<link rel=\"stylesheet\" href=\"http://one.wordpress.test/public_html/wp-content/plugins/demetrius1-plugin/assets/slider.css\" type=\"text/css\" media=\"all\" />";
+		require_once("$this->plugin_path" . "templates/slider.php");
+		echo "
+		<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js\"></script>
+		<script src=\"http://one.wordpress.test/public_html/wp-content/plugins/demetrius1-plugin/assets/build/js/slider.js\"></script>";
 		return ob_get_clean();
 	}
 

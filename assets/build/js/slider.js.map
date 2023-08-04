@@ -1,0 +1,1 @@
+{"version":3,"file":"js/slider.js","mappings":";;;;;AAAAA,QAAQ,CAACC,gBAAgB,CAAC,kBAAkB,EAAE,UAAUC,CAAC,EAAE;EACzD;AAAA,CACD,CAAC,C","sources":["webpack://assets/./src/js/slider.js"],"sourcesContent":["document.addEventListener(\"DOMContentLoaded\", function (e) {\n  //\n});\n"],"names":["document","addEventListener","e"],"sourceRoot":""}

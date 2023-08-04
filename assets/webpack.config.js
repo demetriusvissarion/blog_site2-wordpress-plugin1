@@ -3,9 +3,12 @@ const path = require("path");
 const JS_DIR = path.resolve(__dirname, "src/js");
 // const IMG_DIR = path.resolve(__dirname, "src/images");
 const BUILD_DIR = path.resolve(__dirname, "build");
+
+// add new .js files here to be compiled
 const entry = {
   // app: JS_DIR + "/app.js",
   app: [JS_DIR + "/app.js", JS_DIR + "/form.js"],
+  slider: [JS_DIR + "/slider.js"],
 };
 const output = {
   path: BUILD_DIR,
